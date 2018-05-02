@@ -21,3 +21,7 @@ bundle check || bundle install --jobs 4 --retry 3
 #rm ./tmp/pids/*
 #
 #bundle exec rails s -p 3000 -b '0.0.0.0'
+
+# GET RID OF THIS WHEN YOU ARE RUNNING A SERVER
+# THIS KEEPS THE CONTAINER RUNNING
+tail -f /dev/null

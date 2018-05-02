@@ -19,9 +19,15 @@ run containers
 docker-compose up -d
 ```
 
-get into the web container
+You can run the following command to get into the ruby www container
 ```
 docker-compose exec www /bin/bash
+```
+
+To debug
+```
+docker ps
+docker attach your-container-id
 ```
 
 
