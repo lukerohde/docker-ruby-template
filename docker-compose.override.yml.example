@@ -1,0 +1,14 @@
+version: "3"
+services:
+  db:
+    volumes:
+      - pgdata:/pgdata
+  nuwad:
+    volumes:
+      - www-sync:/app:nocopy
+      - bundle:/usr/local/bundle
+volumes:
+  www-sync:
+    external: true
+  bundle:
+  pgdata:

@@ -1,2 +1,5 @@
 bundle
 pgdata
+docker-compose-override.yml
+docker-sync.yml
+.docker-sync

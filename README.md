@@ -30,6 +30,43 @@ docker ps
 docker attach your-container-id
 ```
 
+## Using docker-compose shortcuts
+typing docker-compose all the time can be tedious so add this to your ~/.bashrc or ~/.bash_profile
+
+```
+alias dc='docker-compose'
+alias dce='docker-compose exec'
+alias dcu='docker-compose up'
+alias dcd='docker-compose down'
+alias dcr='docker-compose run'
+alias dcs='docker-compose stop'
+alias dcb='docker-compose build'
+dceb() { docker-compose exec $1 /bin/bash ; }
+```
+
+## developing with docker on osx
+Docker volume mounts to the host are suuupperrr slow. 
+
+Use docker sync to get your source from the host to the container. 
+```
+cp docker-sync.yml.example docker-sync.yml
+```
+
+And mount your pgdata and bundle data on an external docker volume, so if you rebuild or remove your db or www containers you don't loose all your data and don't have to reinstall all your gems.
+
+```
+cp docker-compose.override.yml.example docker-compose.override.yml
+```
+
+start docker-sync (might need to `gem install docker-sync`???)
+```
+docker-sync start
+```
+
+Sometimes stuff can stop syncing from host to guest. Restarting stuff can help in this order 
+1. docker-compose down www
+2. docker-sync stop
+3. restart docker for mac
 
 ## Setup git for your new project
 
