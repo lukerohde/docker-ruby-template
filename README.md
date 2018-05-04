@@ -41,6 +41,9 @@ alias dcd='docker-compose down'
 alias dcr='docker-compose run'
 alias dcs='docker-compose stop'
 alias dcb='docker-compose build'
+alias dcps='docker-compose ps'
+alias dps='docker ps'
+alias dk='docker kill $(docker ps -q)'
 dceb() { docker-compose exec $1 /bin/bash ; }
 ```
 
