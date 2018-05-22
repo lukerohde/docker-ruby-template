@@ -25,4 +25,4 @@ services:
       - ./www:/app
     tty: true
     stdin_open: true
-    command: ./start.docker
+    command: ./docker-start
