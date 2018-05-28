@@ -1,15 +1,15 @@
 version: "3"
 services:
   db:
-    volumes:
-      - pgdata:/pgdata
+#    volumes:
+#      - ./backup.sql.gz:/docker-entrypoint-initdb.d/seed.sql.gz
+#    ports:
+#      - "5432:5432"
     networks:
       - development
   app:
     volumes:
       - ./app:/app:delegated
-#      - app-sync:/app:nocopy
-      - bundle:/usr/local/bundle
       - root:/root # for bash history etc
     command:
       - ./docker-start.override
@@ -19,8 +19,6 @@ volumes:
   bundle:
   pgdata:
   root:
-#  app-sync:
-#    external: true
 networks:
   development:
 #    external:
