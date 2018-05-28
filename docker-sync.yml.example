@@ -5,5 +5,5 @@ options:
   compose-file-path: 'docker-compose.yml'
   compose-dev-file-path: 'docker-compose.override.yml'
 syncs:
-  www-sync: # tip: add -sync and you keep consistent names as a convention
-    src: './www/'
+  app-sync: # tip: add -sync and you keep consistent names as a convention
+    src: './app/'

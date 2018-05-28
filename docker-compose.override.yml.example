@@ -5,9 +5,10 @@ services:
       - pgdata:/pgdata
     networks:
       - development
-  www:
+  app:
     volumes:
-      - www-sync:/app:nocopy
+      - ./app:/app:delegated
+#      - app-sync:/app:nocopy
       - bundle:/usr/local/bundle
       - root:/root # for bash history etc
     command:
@@ -15,11 +16,11 @@ services:
     networks:
       - development
 volumes:
-  www-sync:
-    external: true
   bundle:
   pgdata:
   root:
+#  app-sync:
+#    external: true
 networks:
   development:
 #    external:
