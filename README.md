@@ -10,6 +10,14 @@ git clone git@github.com:union-software-cooperative/docker-ruby-template.git you
 cd your-project-name
 ```
 
+```
+rm -Rf .git
+```
+
+```
+git init
+```
+
 ## basic docker usage
 run containers (daemonised)
 ```
