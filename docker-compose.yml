@@ -1,20 +1,10 @@
 version: "3"
 services:
-  db:
-    image: postgres:9.6.8
-    restart: always
-    environment:
-      - PGDATA=/pgdata
-      - POSTGRES_DB
-      - POSTGRES_HOST
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-    volumes:
-      - pgdata:/pgdata
   app:
     build:
       context: .
       dockerfile: ./app.dockerfile
+    restart: unless-stopped
     environment:
       - BUNDLE_PATH=/usr/local/bundle
       - GEM_HOME=/usr/local/bundle
@@ -25,16 +15,29 @@ services:
       - POSTGRES_HOST
       - POSTGRES_USER
       - POSTGRES_PASSWORD
-    ports:
-      - "$APP_PORT:3000"
     links:
       - db
     volumes:
-      - bundle:/usr/local/bundle
+      - bundle_app:/usr/local/bundle
+      - root_app:/root # for bash history etc
       - ./app:/app
     tty: true
     stdin_open: true
     command: ./docker-start
+  db:
+    image: postgres:9.6.8
+    restart: unless-stopped
+    environment:
+      - PGDATA=/pgdata
+      - POSTGRES_DB
+      - POSTGRES_HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    volumes:
+      - pgdata:/pgdata
+      - root_db:/root # for bash history etc
 volumes:
+  bundle_app:
   pgdata:
-  bundle:
+  root_app:
+  root_db:

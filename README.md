@@ -53,13 +53,26 @@ alias dckill='docker-compose kill'
 alias dps='docker ps'
 alias dk='docker kill'
 alias dkall='docker kill $(docker ps -q)'
+alias dsstop='docker-compose down && docker-sync stop'
+alias dsstart='docker-sync start'
 alias drestart="osascript -e 'quit app \"Docker\"' && open -a Docker"
+alias git-rollback='git reset --hard && git clean -f'
+alias w="cd ~/Documents/Work"
+alias membership="cd ~/Documents/Work/oop && ./develop && cd membership"
 dceb() { docker-compose exec $1 /bin/bash ; }
 dcub() { docker-compose up -d $1 && docker-compose exec $1 /bin/bash ; }
+dcudb() { docker-compose up -d db && docker-compose exec db psql -U postgres $1 ; }
+
+watch() { while :; do clear; echo WATCHING $@; ($@); sleep 1; done ; }
+get-ruby() { git clone git@github.com:union-software-cooperative/docker-ruby-template.git . ; rm -rf .git ; }
+drm() {
+    docker stop $(docker ps -aq)
+    docker rm $(docker ps -aq)
+}
 ```
 
 ## Persisting data
-Mount your pgdata and bundle data on an external docker volume, so if you rebuild or remove your db or www containers you don't loose all your data and don't have to reinstall all your gems.
+Mount your pgdata and bundle data on an external docker volume, so if you rebuild or remove your db or www containers you don't loose all your data and don't have to reinstall all your gems.  I also persist root, to preserve command history etc...
 
 ## developing with docker on osx
 On osx docker volume mounts to the host are suuupperrr slow.
@@ -79,6 +92,11 @@ The override file will not actually run your app, but instead leave the containe
 
 The short cut for running your app then shelling in is
 `dcub app`
+
+## Using compose and the override file in production 
+If running more than one compose app on a production server, you'll want to have your port mappings in the override.  For instance, it is common to clash on postgres' port 5431 unless you override this port for each app. 
+
+If you are running multiple compose apps that use each other's api's (think microservices) but don't want to expose those service publicly, configure an external docker network.  `docker network add my-production-net`  
 
 ## Setup git for your new project
 
