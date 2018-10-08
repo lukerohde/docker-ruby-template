@@ -34,7 +34,7 @@ The first command makes editing and reloading your bash_profile easy.
 The second command makes getting this repo easy.
 
 ```
-# edit your bash profile
+# shortcut for editing your bash profile and these shortcuts
 alias bp='vim ~/.bash_profile && . ~/.bash_profile'
 # Get this repo!
 get-ruby() { git clone git@github.com:union-software-cooperative/docker-ruby-template.git . ; rm -rf .git ; }
@@ -49,25 +49,20 @@ alias dcs='docker-compose stop'
 alias dcb='docker-compose build'
 alias dcps='docker-compose ps'
 alias dcl='docker-compose logs'
+alias dclf='docker-compose logs -f --tail=1000'
 alias dckill='docker-compose kill'
 alias dps='docker ps'
 alias dk='docker kill'
 alias dkall='docker kill $(docker ps -q)'
-alias dsstop='docker-compose down && docker-sync stop'
-alias dsstart='docker-sync start'
 alias drestart="osascript -e 'quit app \"Docker\"' && open -a Docker"
-alias git-rollback='git reset --hard && git clean -f'
-alias w="cd ~/Documents/Work"
-alias membership="cd ~/Documents/Work/oop && ./develop && cd membership"
+alias dstop='docker stop $(docker ps -aq)'
+alias dprune='docker system prune -a'
 dceb() { docker-compose exec $1 /bin/bash ; }
 dcub() { docker-compose up -d $1 && docker-compose exec $1 /bin/bash ; }
 dcudb() { docker-compose up -d db && docker-compose exec db psql -U postgres $1 ; }
-
-watch() { while :; do clear; echo WATCHING $@; ($@); sleep 1; done ; }
-get-ruby() { git clone git@github.com:union-software-cooperative/docker-ruby-template.git . ; rm -rf .git ; }
-drm() {
+ddeleteall() {
     docker stop $(docker ps -aq)
-    docker rm $(docker ps -aq)
+    docker system prune -a
 }
 ```
 
