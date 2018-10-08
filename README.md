@@ -6,16 +6,22 @@ This project sets up a ruby development environment with a postgresql database. 
 git clone git@github.com:union-software-cooperative/docker-ruby-template.git your-project-name
 ```
 
+## Setup git for your new project
+
+unlink the docker-ruby-template repo
 ```
 cd your-project-name
+rm -rf .git
 ```
 
-```
-rm -Rf .git
-```
+make a new repo on github
 
 ```
 git init
+git remote add origin your-git-repo
+git add .
+git commit -m "Initial commit."
+git push origin master
 ```
 
 ## basic docker usage
@@ -75,7 +81,7 @@ ddeleteall() {
 ```
 
 ## Persisting data
-Mount your pgdata and bundle data on an external docker volume, so if you rebuild or remove your db or www containers you don't loose all your data and don't have to reinstall all your gems.  I also persist root, to preserve command history etc...
+Mount your pgdata and bundle data on an external docker volume, so if you rebuild or remove your db or www containers you don't loose all your data and don't have to reinstall all your gems.  I also persist root, to preserve command history etc...  This is done by default in the docker-compose.yaml file.
 
 ## developing with docker on osx
 On osx docker volume mounts to the host are suuupperrr slow.
@@ -101,19 +107,3 @@ If running more than one compose app on a production server, you'll want to have
 
 If you are running multiple compose apps that use each other's api's (think microservices) but don't want to expose those service publicly, configure an external docker network.  `docker network add my-production-net`  
 
-## Setup git for your new project
-
-unlink the docker-ruby-template repo
-```
-rm -rf .git
-```
-
-make a new repo on github
-
-```
-git init
-git remote add origin your-git-repo
-git add .
-git commit -m "Initial commit."
-git push origin master
-```
