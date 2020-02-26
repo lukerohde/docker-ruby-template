@@ -43,6 +43,8 @@ docker-compose exec app /bin/bash
 ## Using docker-compose shortcuts
 typing docker-compose all the time can be tedious so add this to your ~/.bashrc or ~/.bash_profile
 
+Then `docker-compose stop && docker-compose up -d && docker-compose log -tf` becomes `dcs && dcu -d && dcl -tf`.
+
 The first command makes editing and reloading your bash_profile easy.
 
 The second command makes getting this repo easy.
@@ -97,10 +99,12 @@ cp docker-compose.override.yml.example docker-compose.override.yml
       - ./app:/app:delegated
 ```
 
-The override file will not actually run your app, but instead leave the container running so you can shell in and run it yourself.  This makes debugging easy.  
+The example override file will not actually run your app.  Instead it runs an override command that hangs the container to leave it running so you can shell in and run your application yourself.  This makes debugging easy.  
 
 The short cut for running your app then shelling in is
-`dcub app`
+`dcub app` 
+
+Once shelled in you can run `ruby start` or `rails s -b 0.0.0.0` etc...
 
 ## Using compose and the override file in production 
 If running more than one compose app on a production server, you'll want to have your port mappings in the override.  For instance, it is common to clash on postgres' port 5431 unless you override this port for each app. 
