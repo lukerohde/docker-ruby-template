@@ -47,11 +47,21 @@ docker-compose exec app /bin/bash
 ## Using docker-compose shortcuts
 typing docker-compose all the time can be tedious so add this to your ~/.bashrc or ~/.bash_profile
 
-Then `docker-compose stop && docker-compose up -d && docker-compose log -tf` becomes `dcs && dcu -d && dcl -tf`.
+Then 
 
-The first command makes editing and reloading your bash_profile easy.
+`docker-compose stop && docker-compose up -d && docker-compose log -tf` 
 
-The second command makes getting this repo easy.
+becomes just
+
+`dcs && dcu -d && dcl -tf`
+
+but i have a shortcut for that
+
+`dcrestart`
+
+The first alias makes editing and reloading your bash_profile easy.
+
+The second command `get-ruby` makes getting this repo easy.
 
 ```
 # shortcut for editing your bash profile and these shortcuts
@@ -71,6 +81,7 @@ alias dcps='docker-compose ps'
 alias dcl='docker-compose logs'
 alias dclf='docker-compose logs -f --tail=1000'
 alias dckill='docker-compose kill'
+alias dcrestart='docker-compose stop && docker-compose up -d && docker-compose logs -ft'
 alias dps='docker ps'
 alias dk='docker kill'
 alias dkall='docker kill $(docker ps -q)'
