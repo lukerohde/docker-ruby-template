@@ -2,7 +2,7 @@
 
 This project sets up a ruby development environment with a postgresql database.   Bundle install and migrating the database is left to docker runtime (via a script in app/start.docker) rather than at build time (which is a pain because everytime your gemfile changes it has to install all gems from scratch).  
 
-Check the app.dockerfile which has several ruby configs to choose from.  On basic ruby is uncommented.
+Check the app.dockerfile which has several ruby configs to choose from.  Only basic ruby is uncommented.
 
 Also check the app/docker-start.  It also only has basic ruby startup uncommented, with some rails examples commented out.
 
